@@ -20,28 +20,38 @@ namespace TheLongGame
         {
 
             //When the program starts, ask the user to enter their name.
-           Console.WriteLine("Hi! Please enter your name:");
-          string newName = Console.ReadLine();
+                Console.WriteLine("Hi! Please enter your name:");
+                string newName = Console.ReadLine();
+
+            string currentDirectory = Directory.GetCurrentDirectory();
+            Console.WriteLine(currentDirectory);
+            //if name alr exists, retrieve .txt file
 
             //change so newName is var not string
-            if (File.Exists("newName.txt"){
-                File.OpenRead("newName.txt");
-                User user = new User(newName, )
+            if (File.Exists(currentDirectory + newName + ".txt"){
+                FileStream f = new FileStream(newName+".txt", FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
+
+                User user = new User(newName, int.Parse(File.OpenRead(currentDirectory + newName + ".txt"));
             }
+            else
+            {
+                using (StreamWriter writer = File.CreateText("newName.txt"))
+                    User user = new User(newName, 0);
 
-            User user = new User(newName, 0);
+                }
 
-            Console.WriteLine("Hello, " + newName + "! Your current score is " + user.score + ". Press a key to add to your score, or press enter to exit.");
 
-          
-           // By default, the player starts with a score of 0.
-           // Add 1 point to their score for every keypress they make.
-           // Display the player’s updated score after each keypress.
-           // When the player presses the Enter key, end the game.
+                   Console.WriteLine("Hello, " + newName + "! Your current score is " + user.score + ". Press a key to add to your score, or press enter to exit.");
+
+
+                // By default, the player starts with a score of 0.
+                // Add 1 point to their score for every keypress they make.
+                // Display the player’s updated score after each keypress.
+                // When the player presses the Enter key, end the game.
                 // Hint: the following code reads a keypress and checks whether it was the Enter key: Console.ReadKey().Key == ConsoleKey.Enter
-          //  When the player presses Enter, save their score in a file.
+                //  When the player presses Enter, save their score in a file.
                 // Hint: Consider saving this to a file named[username].txt.For this challenge, you can assume the user doesn’t enter a name that would produce an illegal file name(such as *).
-          //  When a user enters a name at the start, if they already have a previously saved score, start with that score instead.
+                //  When a user enters a name at the start, if they already have a previously saved score, start with that score instead.
+            }
         }
-    }
 }
